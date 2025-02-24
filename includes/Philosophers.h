@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/02/25 00:00:04 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/25 00:03:01 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				meal_count;
+	int				num_of_meals;
 	pthread_mutex_t	mutex;
 }	t_data;
 
@@ -37,7 +38,5 @@ typedef struct s_philo
 	int		id;
 	int		meal_count;
 }	t_philo;
-
-typedef struct s_
 
 #endif
