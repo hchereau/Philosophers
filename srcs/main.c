@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:29:42 by linux             #+#    #+#             */
-/*   Updated: 2025/02/25 00:00:37 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/26 23:55:41 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 
 	if (init_data(argc - 1, argv + 1, &data) == FAILURE)
 		return (FAILURE);
-
+	core_routine(&data);
 	return (SUCCESS);
 
 }

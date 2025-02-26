@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 00:00:22 by linux             #+#    #+#             */
-/*   Updated: 2025/02/25 00:00:34 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/26 22:05:24 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ t_state_functions	init_mutex(t_data *data)
 		printf("Error: Mutex initialization failed\n");
 		return (FAILURE);
 	}
+	core_routine(data);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/02/25 00:03:01 by linux            ###   ########.fr       */
+/*   Updated: 2025/02/26 21:59:06 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ typedef struct s_philo
 	int		id;
 	int		meal_count;
 }	t_philo;
+
+t_state_functions	init_mutex(t_data *data);
 
 #endif

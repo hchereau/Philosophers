@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_args.c                                         :+:      :+:    :+:   */
+/*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 23:57:21 by linux             #+#    #+#             */
-/*   Updated: 2025/02/26 21:59:16 by linux            ###   ########.fr       */
+/*   Created: 2025/02/26 23:49:49 by linux             #+#    #+#             */
+/*   Updated: 2025/02/26 23:51:03 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Philosophers.h"
 
-void	get_args(int argc, char **argv, t_data *data)
+void	*philo_routine(void *arg)
 {
-	if (argc != 5)
-	{
-		printf("Error: Wrong number of arguments\n");
-		exit(FAILURE);
-	}
-	data->philo_count = ft_atoi(argv[0]);
-	data->time_to_die = ft_atoi(argv[1]);
-	data->time_to_eat = ft_atoi(argv[2]);
-	data->time_to_sleep = ft_atoi(argv[3]);
-	data->meal_count = ft_atoi(argv[4]);
-	init_mutex(data);
+	t_data	*data;
+
+	data = (t_data *)arg;
+
+	printf("Philo routine\n");
+	return (NULL);
 }
