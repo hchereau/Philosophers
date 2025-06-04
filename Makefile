@@ -4,6 +4,7 @@ NAME := Philo
 
 PATH_SRCS := srcs/
 
+SRCS += main.c
 
 vpath %.c $(PATH_SRCS)
 
