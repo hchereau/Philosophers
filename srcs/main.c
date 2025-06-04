@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:20 by linux             #+#    #+#             */
-/*   Updated: 2025/06/04 16:00:25 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/04 16:16:48 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data			data;
+	t_philosopher	*philos;
 
 	if (argc < 5 || argc > 6)
 	{
@@ -22,10 +23,9 @@ int	main(int argc, char **argv)
 	}
 	if (init_data(&data, argc, argv) != SUCCESS)
 	{
-		printf("Error: Failed to initialize data.\n");
 		return (FAILURE);
 	}
-	if (create_philosophers(&data) != 0)
+	if (create_philosophers(&data, &philos) != 0)
 	{
 		printf("Error: Failed to create philosophers.\n");
 		return (FAILURE);

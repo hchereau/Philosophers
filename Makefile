@@ -5,6 +5,8 @@ NAME := Philo
 PATH_SRCS := srcs/
 
 SRCS += main.c
+SRCS += init_data.c
+SRCS += create_philosophers.c
 
 vpath %.c $(PATH_SRCS)
 

@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/06/04 15:59:41 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/04 16:15:37 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,29 @@
 # define MAX_PHILOSOPHERS 200
 # define INFINITE_MEALS -1
 
+/* ENUM */
+
 typedef enum e_state_data
 {
 	SUCCESS,
 	FAILED_VALUE,
-	FAILED_MUTEX,
-	FAILED_THREAD
 }	t_state_data;
 
 typedef enum e_main_state
 {
-	SUCESS,
+	SUCCESS,
 	FAILURE,
 }	t_main_state;
+
+typedef enum e_philosopher_state
+{
+	THINKING,
+	EATING,
+	SLEEPING,
+	DEAD
+}	t_philosopher_state;
+
+/* STRUCT */
 
 typedef struct s_data
 {
@@ -41,5 +51,20 @@ typedef struct s_data
 	int		time_to_die;
 	int		max_meals;
 }	t_data;
+
+typedef struct s_philosopher
+{
+	int					id;
+	t_philosopher_state	state;
+	int					meals_eaten;
+	pthread_t			thread;
+	pthread_mutex_t		*left_forks;
+	pthread_mutex_t		*right_forks;
+	struct s_data		*data;
+}	t_philosopher;
+
+/* PROTOTYPE */
+
+t_state_data	init_data(t_data *data, int argc, char **argv);
 
 #endif
