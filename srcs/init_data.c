@@ -6,11 +6,29 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:08:16 by linux             #+#    #+#             */
-/*   Updated: 2025/06/04 16:04:05 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/07 18:56:41 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Philosophers.h"
+
+static t_main_state	init_mutexs(t_data *data)
+{
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philosophers);
+	if (data->forks == NULL)
+	{
+		printf("Error: Memory allocation failed for forks.\n");
+		exit(FAILURE);
+	}
+	for (int i = 0; i < data->num_philosophers; i++)
+	{
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+		{
+			printf("Error: Failed to initialize mutex for fork %d.\n", i + 1);
+			exit(FAILURE);
+		}
+	}
+}
 
 t_state_data	init_data(t_data *data, int argc, char **argv)
 {
@@ -27,10 +45,15 @@ t_state_data	init_data(t_data *data, int argc, char **argv)
 		printf("Error: too many philosophers, max is %d\n", MAX_PHILOSOPHERS);
 		return (FAILED_VALUE);
 	}
-	if (data->num_philosophers <= 0 || data->time_to_eat <= 0 ||
-			data->time_to_sleep <= 0 || (argc == 6 && data->max_meals <= 0))
+	if (data->num_philosophers <= 0 || data->time_to_eat <= 0
+		|| data->time_to_sleep <= 0 || (argc == 6 && data->max_meals <= 0))
 	{
 		printf("Error: Invalid argument values.\n");
+		return (FAILED_VALUE);
+	}
+	if (init_mutexs(data) != SUCCESS)
+	{
+		printf("Error: Failed to initialize mutexes.\n");
 		return (FAILED_VALUE);
 	}
 	return (SUCCESS);

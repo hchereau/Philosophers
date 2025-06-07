@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/06/07 17:36:49 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/07 18:11:28 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ typedef enum e_philosopher_state
 
 typedef struct s_data
 {
-	int		num_philosophers;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		time_to_die;
-	int		max_meals;
+	int				num_philosophers;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				time_to_die;
+	int				max_meals;
+	pthread_mutex_t	*forks;
 }	t_data;
 
 typedef struct s_philosopher

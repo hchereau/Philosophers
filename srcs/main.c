@@ -6,11 +6,24 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:20 by linux             #+#    #+#             */
-/*   Updated: 2025/06/04 16:16:48 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/07 18:26:08 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Philosophers.h"
+
+static void	start_simulation(t_data *data, t_philosopher *philos)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_philosophers)
+	{
+		pthread_join(philos[i].thread, NULL);
+		i++;
+	}
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -30,7 +43,7 @@ int	main(int argc, char **argv)
 		printf("Error: Failed to create philosophers.\n");
 		return (FAILURE);
 	}
-	start_simulation(&data);
+	start_simulation(&data, philos);
 	cleanup(&data);
 	return (SUCCESS);
 }
