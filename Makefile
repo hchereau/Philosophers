@@ -7,6 +7,7 @@ PATH_SRCS := srcs/
 SRCS += main.c
 SRCS += init_data.c
 SRCS += create_philosophers.c
+SRCS += ft_atoi.c
 
 vpath %.c $(PATH_SRCS)
 

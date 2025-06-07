@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/06/04 16:15:37 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/07 17:36:49 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ typedef struct s_philosopher
 /* PROTOTYPE */
 
 t_state_data	init_data(t_data *data, int argc, char **argv);
+int				ft_atoi(const char *nptr);
 
 #endif
