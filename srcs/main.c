@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:20 by linux             #+#    #+#             */
-/*   Updated: 2025/06/08 00:10:15 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/08 03:06:47 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 		printf("Error: Failed to create philosophers.\n");
 		return (FAILURE);
 	}
+	pthread_create(data.monitor_thread, NULL, NULL, NULL);
 	start_simulation(&data, philos);
 	cleanup(&data);
 	return (SUCCESS);

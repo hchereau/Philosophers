@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/06/08 00:43:35 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/08 03:16:40 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ typedef struct s_data
 	int				max_meals;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
+	pthread_t		monitor_thread;
 	long			start_time;
+	int				simulation_running;
+	pthread_mutex_t	simulation_mutex;
 }	t_data;
 
 typedef struct s_philosopher
