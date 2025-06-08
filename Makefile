@@ -21,12 +21,6 @@ PATH_OBJS := objs/
 
 OBJS := $(patsubst %.c,$(PATH_OBJS)%.o,$(SRCS))
 
-### LIBFT ######################################################################
-
-PATH_LIBFT := libft/
-
-LIBFT := $(PATH_LIBFT)libft.a
-
 ### COMPILATION ################################################################
 
 CC := CC
@@ -45,19 +39,14 @@ BLUE := \033[0;34m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(OBJS)
 	@echo "$(BLUE)Compiling $(NAME)...$(WHITE)"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(PATH_INCLUDES) -I $(PATH_LIBFT)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(PATH_INCLUDES)
 	@echo "$(GREEN)$(NAME) has been created !$(WHITE)"'
 
 $(OBJS):$(PATH_OBJS)%.o: %.c
 	@mkdir -p $(PATH_OBJS)
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(PATH_INCLUDES) -I $(PATH_LIBFT)
-
-$(LIBFT):
-	@echo "$(BLUE)Compiling $(NAME)...$(WHITE)"
-	@$(MAKE) -sC $(PATH_LIBFT)
-	@echo "$(GREEN)$(NAME) has been created !$(WHITE)"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(PATH_INCLUDES)
 
 clean:
 	@echo "$(BLUE)Cleaning...$(WHITE)"

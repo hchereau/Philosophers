@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:20 by linux             #+#    #+#             */
-/*   Updated: 2025/06/07 18:26:08 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/08 00:10:15 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 	{
 		return (FAILURE);
 	}
+	data.start_time = get_timestamp();
 	if (create_philosophers(&data, &philos) != 0)
 	{
 		printf("Error: Failed to create philosophers.\n");
