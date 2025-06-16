@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:08:16 by linux             #+#    #+#             */
-/*   Updated: 2025/06/08 04:06:25 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/08 23:36:02 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_main_state	init_mutexs(t_data *data)
 			exit(FAILURE);
 		}
 	}
+	return (SUCCESS);
 }
 
 t_state_data	init_data(t_data *data, int argc, char **argv)
@@ -58,5 +59,5 @@ t_state_data	init_data(t_data *data, int argc, char **argv)
 	}
 	pthread_mutex_init(&data->simulation_mutex, NULL);
 	data->simulation_running = 1;
-	return (SUCCESS);
+	return (SUCCESS_VALUE);
 }

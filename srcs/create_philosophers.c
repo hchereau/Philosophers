@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:06:17 by linux             #+#    #+#             */
-/*   Updated: 2025/06/08 02:42:14 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/08 23:36:45 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*philosopher_routine(void *arg)
 	t_philosopher	*philosopher;
 
 	philosopher = (t_philosopher *)arg;
-	while (1)
+	while (is_simulation_running(philosopher->data))
 	{
 		philosopher_think(philosopher);
 		try_take_forks(philosopher);
@@ -55,5 +55,5 @@ t_state_data	create_philosophers(t_data *data, t_philosopher **philos)
 		}
 		i++;
 	}
-	return (SUCCESS);
+	return (SUCCESS_VALUE);
 }

@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/06/08 03:16:40 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/08 23:36:38 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 # define MAX_PHILOSOPHERS 200
 # define INFINITE_MEALS -1
+# define SPACE ' '
+# define FIRST_WHITESPACE 9
+# define LAST_WHITESPACE 13
 
 /* ENUM */
 
 typedef enum e_state_data
 {
-	SUCCESS,
+	SUCCESS_VALUE,
 	FAILED_VALUE,
 }	t_state_data;
 
@@ -42,6 +47,12 @@ typedef enum e_philosopher_state
 	SLEEPING,
 	DEAD
 }	t_philosopher_state;
+
+typedef enum e_simulation_state
+{
+	RUNNING,
+	STOPPED
+}	t_simulation_state;
 
 /* STRUCT */
 
@@ -74,16 +85,18 @@ typedef struct s_philosopher
 
 /* PROTOTYPE */
 
-t_state_data	init_data(t_data *data, int argc, char **argv);
-int				ft_atoi(const char *nptr);
-void			print_status(t_philosopher *philosopher,
-					t_philosopher_state state);
-t_state_data	create_philosophers(t_data *data, t_philosopher **philos);
-long			get_timestamp(void);
-void			philosopher_think(t_philosopher *philosopher);
-void			try_take_forks(t_philosopher *philosopher);
-void			philosopher_eat(t_philosopher *philosopher);
-void			return_forks(t_philosopher *philosopher);
+t_state_data		init_data(t_data *data, int argc, char **argv);
+int					ft_atoi(const char *nptr);
+void				print_status(t_philosopher *philosopher,
+						t_philosopher_state state);
+t_state_data		create_philosophers(t_data *data, t_philosopher **philos);
+long				get_timestamp(void);
+void				philosopher_think(t_philosopher *philosopher);
+void				try_take_forks(t_philosopher *philosopher);
+void				philosopher_eat(t_philosopher *philosopher);
+void				return_forks(t_philosopher *philosopher);
+void				cleanup(t_data *data, t_philosopher *philos);
+t_simulation_state	is_simulation_running(t_data *data);
 
 
 #endif

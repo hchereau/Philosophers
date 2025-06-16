@@ -8,6 +8,10 @@ SRCS += main.c
 SRCS += init_data.c
 SRCS += create_philosophers.c
 SRCS += ft_atoi.c
+SRCS += cleanup.c
+SRCS += is_simulation_running.c
+SRCS += philosophers_state.c
+SRCS += print_status.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -23,7 +27,7 @@ OBJS := $(patsubst %.c,$(PATH_OBJS)%.o,$(SRCS))
 
 ### COMPILATION ################################################################
 
-CC := CC
+CC := clang
 
 CFLAGS += -Wall
 CFLAGS += -Wextra
@@ -42,7 +46,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "$(BLUE)Compiling $(NAME)...$(WHITE)"
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(PATH_INCLUDES)
-	@echo "$(GREEN)$(NAME) has been created !$(WHITE)"'
+	@echo "$(GREEN)$(NAME) has been created !$(WHITE)"
 
 $(OBJS):$(PATH_OBJS)%.o: %.c
 	@mkdir -p $(PATH_OBJS)
@@ -51,13 +55,11 @@ $(OBJS):$(PATH_OBJS)%.o: %.c
 clean:
 	@echo "$(BLUE)Cleaning...$(WHITE)"
 	@rm -rf $(PATH_OBJS)
-	@$(MAKE) -sC $(PATH_LIBFT) clean
 	@echo "$(GREEN)Cleaned !$(WHITE)"
 
 fclean: clean
 	@echo "$(BLUE)Full Cleaning...$(WHITE)"
 	@rm -f $(NAME)
-	@$(MAKE) -sC $(PATH_LIBFT) fclean
 	@echo "$(GREEN)Full Cleaned !$(WHITE)"
 
 re: fclean all
