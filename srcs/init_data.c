@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:08:16 by linux             #+#    #+#             */
-/*   Updated: 2025/06/08 23:36:02 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/20 10:22:13 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ t_state_data	init_data(t_data *data, int argc, char **argv)
 		return (FAILED_VALUE);
 	}
 	if (data->num_philosophers <= 0 || data->time_to_eat <= 0
-		|| data->time_to_sleep <= 0 || (argc == 6 && data->max_meals <= 0))
+		|| data->time_to_sleep <= 0
+		|| (argc == 6 && data->max_meals <= 0)
+		|| data->time_to_die <= 0)
 	{
 		printf("Error: Invalid argument values.\n");
 		return (FAILED_VALUE);
@@ -55,6 +57,11 @@ t_state_data	init_data(t_data *data, int argc, char **argv)
 	if (init_mutexs(data) != SUCCESS)
 	{
 		printf("Error: Failed to initialize mutexes.\n");
+		return (FAILED_VALUE);
+	}
+	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
+	{
+		printf("Error: Failed to initialize print mutex.\n");
 		return (FAILED_VALUE);
 	}
 	pthread_mutex_init(&data->simulation_mutex, NULL);
