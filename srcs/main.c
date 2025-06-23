@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:20 by linux             #+#    #+#             */
-/*   Updated: 2025/06/16 11:01:22 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/23 22:27:26 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*monitor_routine(void *arg)
 
 	philos = (t_philosopher *)arg;
 	data = philos[0].data;
-	while (1)
+	while (SIMULATION_RUNNING)
 	{
 		i = 0;
 		while (i < data->num_philosophers)

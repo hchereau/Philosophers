@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 22:51:25 by linux             #+#    #+#             */
-/*   Updated: 2025/06/08 23:03:53 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/23 22:26:04 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	cleanup(t_data *data, t_philosopher *philos)
 		while (i < data->num_philosophers)
 		{
 			pthread_mutex_destroy(&data->forks[i]);
-			pthread_cancel(philos[i].thread);
 			++i;
 		}
 		free(philos);
