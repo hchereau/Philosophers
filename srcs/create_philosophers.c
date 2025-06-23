@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:06:17 by linux             #+#    #+#             */
-/*   Updated: 2025/06/08 23:36:45 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/23 22:47:02 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*philosopher_routine(void *arg)
 	{
 		philosopher_think(philosopher);
 		try_take_forks(philosopher);
-		philosopher->last_meal_time = get_timestamp();
+		// philosopher->last_meal_time = get_timestamp();
 		philosopher_eat(philosopher);
 		return_forks(philosopher);
 	}

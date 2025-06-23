@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:20 by linux             #+#    #+#             */
-/*   Updated: 2025/06/23 22:27:26 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/23 22:51:49 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,20 @@ void	*monitor_routine(void *arg)
 	t_data			*data;
 	int				i;
 	long			now;
+	long			last_meal_time;
 
 	philos = (t_philosopher *)arg;
 	data = philos[0].data;
-	while (SIMULATION_RUNNING)
+	while (is_simulation_running(data))
 	{
 		i = 0;
 		while (i < data->num_philosophers)
 		{
 			now = get_timestamp();
-			if (now - philos[i].last_meal_time > data->time_to_die)
+			pthread_mutex_lock(&data->simulation_mutex);
+			last_meal_time = philos[i].last_meal_time;
+			pthread_mutex_unlock(&data->simulation_mutex);
+			if (now - last_meal_time > data->time_to_die)
 			{
 				print_status(&philos[i], DEAD);
 				pthread_mutex_lock(&data->simulation_mutex);
@@ -39,6 +43,7 @@ void	*monitor_routine(void *arg)
 		}
 		usleep(1000);
 	}
+	return (NULL);
 }
 
 static void	start_simulation(t_data *data, t_philosopher *philos)

@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:46:10 by linux             #+#    #+#             */
-/*   Updated: 2025/06/16 11:52:23 by linux            ###   ########.fr       */
+/*   Updated: 2025/06/23 22:45:50 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	philosopher_eat(t_philosopher *philosopher)
 	print_status(philosopher, EATING);
 	usleep(philosopher->data->time_to_eat * 1000);
 	philosopher->meals_eaten++;
+	pthread_mutex_lock(&philosopher->data->simulation_mutex);
 	philosopher->last_meal_time = get_timestamp();
+	pthread_mutex_unlock(&philosopher->data->simulation_mutex);
 }
 
 void	return_forks(t_philosopher *philosopher)
