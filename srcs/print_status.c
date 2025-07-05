@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:47:58 by linux             #+#    #+#             */
-/*   Updated: 2025/07/05 14:49:04 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/05 17:57:12 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	print_status(t_philosopher *philosopher, t_philosopher_state state)
 		return ;
 	timestamp = get_timestamp() - philosopher->data->start_time;
 	pthread_mutex_lock(&philosopher->data->print_mutex);
-	printf("%ldms %d %s\n", timestamp, philosopher->id, state_str);
+	printf("%ld %d %s\n", timestamp, philosopher->id, state_str);
 	pthread_mutex_unlock(&philosopher->data->print_mutex);
 }
