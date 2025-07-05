@@ -94,19 +94,30 @@ int	main(int argc, char **argv)
 		printf("Usage: %s num_philosophers time_to_die time_to_eat time_to_sleep [max_meals]\n", argv[0]);
 		return (FAILURE);
 	}
+       philos = NULL;
        if (init_data(&data, argc, argv) != SUCCESS_VALUE)
-	{
-		return (FAILURE);
-	}
+        {
+                return (FAILURE);
+        }
 	data.start_time = get_timestamp();
        if (create_philosophers(&data, &philos) != SUCCESS_VALUE)
-	{
-		printf("Error: Failed to create philosophers.\n");
-		return (FAILURE);
-	}
-	pthread_create(&data.monitor_thread, NULL, monitor_routine, philos);
-	start_simulation(&data, philos);
-	pthread_join(data.monitor_thread, NULL);
-	cleanup(&data, philos);
+        {
+                printf("Error: Failed to create philosophers.\n");
+                cleanup(&data, NULL);
+                return (FAILURE);
+        }
+        if (pthread_create(&data.monitor_thread, NULL, monitor_routine, philos) != 0)
+        {
+                printf("Error: Failed to create monitor thread.\n");
+                pthread_mutex_lock(&data.simulation_mutex);
+                data.simulation_running = 0;
+                pthread_mutex_unlock(&data.simulation_mutex);
+                start_simulation(&data, philos);
+                cleanup(&data, philos);
+                return (FAILURE);
+        }
+        start_simulation(&data, philos);
+        pthread_join(data.monitor_thread, NULL);
+        cleanup(&data, philos);
 	return (SUCCESS);
 }

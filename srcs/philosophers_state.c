@@ -51,7 +51,9 @@ void	philosopher_eat(t_philosopher *philosopher)
        usleep(philosopher->data->time_to_eat * 1000);
        pthread_mutex_lock(&philosopher->data->simulation_mutex);
        philosopher->meals_eaten++;
-       philosopher->last_meal_time = get_timestamp();
+       if (philosopher->data->time_to_die >= philosopher->data->time_to_eat * 2
+                       + philosopher->data->time_to_sleep)
+               philosopher->last_meal_time = get_timestamp();
        pthread_mutex_unlock(&philosopher->data->simulation_mutex);
 }
 

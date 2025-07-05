@@ -14,21 +14,25 @@
 
 static t_main_state	init_mutexs(t_data *data)
 {
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philosophers);
-	if (data->forks == NULL)
-	{
-		printf("Error: Memory allocation failed for forks.\n");
-		exit(FAILURE);
-	}
-	for (int i = 0; i < data->num_philosophers; i++)
-	{
-		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
-		{
-			printf("Error: Failed to initialize mutex for fork %d.\n", i + 1);
-			exit(FAILURE);
-		}
-	}
-	return (SUCCESS);
+        data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philosophers);
+        if (data->forks == NULL)
+        {
+                printf("Error: Memory allocation failed for forks.\n");
+                return (FAILURE);
+        }
+        for (int i = 0; i < data->num_philosophers; i++)
+        {
+                if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+                {
+                        printf("Error: Failed to initialize mutex for fork %d.\n", i + 1);
+                        while (--i >= 0)
+                                pthread_mutex_destroy(&data->forks[i]);
+                        free(data->forks);
+                        data->forks = NULL;
+                        return (FAILURE);
+                }
+        }
+        return (SUCCESS);
 }
 
 t_state_data	init_data(t_data *data, int argc, char **argv)
@@ -64,7 +68,16 @@ t_state_data	init_data(t_data *data, int argc, char **argv)
 		printf("Error: Failed to initialize print mutex.\n");
 		return (FAILED_VALUE);
 	}
-	pthread_mutex_init(&data->simulation_mutex, NULL);
-	data->simulation_running = 1;
+        if (pthread_mutex_init(&data->simulation_mutex, NULL) != 0)
+        {
+                printf("Error: Failed to initialize simulation mutex.\n");
+                for (int i = 0; i < data->num_philosophers; i++)
+                        pthread_mutex_destroy(&data->forks[i]);
+                free(data->forks);
+                data->forks = NULL;
+                pthread_mutex_destroy(&data->print_mutex);
+                return (FAILED_VALUE);
+        }
+        data->simulation_running = 1;
 	return (SUCCESS_VALUE);
 }
