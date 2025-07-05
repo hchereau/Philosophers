@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_status.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:47:58 by linux             #+#    #+#             */
-/*   Updated: 2025/06/20 10:26:44 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/05 10:11:51 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	print_status(t_philosopher *philosopher, t_philosopher_state state)
 		return ;
 	timestamp = get_timestamp() - philosopher->data->start_time;
 	pthread_mutex_lock(&philosopher->data->print_mutex);
-	printf("%ld %d %s\n", timestamp, philosopher->id, state_str);
+	printf("%ldms %d %s\n", timestamp, philosopher->id, state_str);
 	pthread_mutex_unlock(&philosopher->data->print_mutex);
 }
