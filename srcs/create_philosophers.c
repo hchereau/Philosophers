@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_philosophers.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:06:17 by linux             #+#    #+#             */
-/*   Updated: 2025/06/23 22:47:02 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/04 15:27:59 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*philosopher_routine(void *arg)
 	t_philosopher	*philosopher;
 
 	philosopher = (t_philosopher *)arg;
+	if (philosopher->id % 2 != 0)
+		usleep(philosopher->data->time_to_eat * 1000 / 2);
 	while (is_simulation_running(philosopher->data))
 	{
 		philosopher_think(philosopher);

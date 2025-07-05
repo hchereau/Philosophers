@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers_state.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:46:10 by linux             #+#    #+#             */
-/*   Updated: 2025/06/23 22:45:50 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/04 15:50:32 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,29 @@
 
 void	philosopher_think(t_philosopher *philosopher)
 {
+	usleep(philosopher->data->time_to_sleep * 1000);
 	print_status(philosopher, THINKING);
 }
 
+// void	one_fork(t_philosopher *philosopher)
+// {
+// 	pthread_mutex_lock(philosopher->left_forks);
+// 	print_status(philosopher, FORKS_TAKEN);
+// 	usleep(philosopher->data->time_to_die * 1000);
+// 	print_status(philosopher, DEAD);
+// 	pthread_mutex_lock(&philosopher->data->simulation_mutex);
+// 	philosopher->data->simulation_running = 0;
+// 	pthread_mutex_unlock(&philosopher->data->simulation_mutex);
+// 	pthread_mutex_unlock(philosopher->left_forks);
+// 	pthread_exit(NULL);
+// }
+
 void	try_take_forks(t_philosopher *philosopher)
 {
+	// if (philosopher->left_forks == philosopher->right_forks)
+	// {
+	// 		one_fork(philosopher);
+	// }
 	if (philosopher->id % 2 == 0)
 	{
 		pthread_mutex_lock(philosopher->left_forks);

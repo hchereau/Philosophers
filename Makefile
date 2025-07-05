@@ -32,7 +32,7 @@ CC := clang
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
-CFLAGS += -fsanitize=thread
+# CFLAGS += -fsanitize=thread
 CFLAGS += -g3
 
 ### COLORS ####################################################################

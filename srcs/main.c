@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:58:20 by linux             #+#    #+#             */
-/*   Updated: 2025/06/23 22:51:49 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/04 16:36:13 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ int	main(int argc, char **argv)
 		return (FAILURE);
 	}
 	if (init_data(&data, argc, argv) != SUCCESS)
-	{
 		return (FAILURE);
-	}
 	data.start_time = get_timestamp();
 	if (create_philosophers(&data, &philos) != SUCCESS)
 	{
