@@ -17,6 +17,16 @@ void	*philosopher_routine(void *arg)
 	t_philosopher	*philosopher;
 
 	philosopher = (t_philosopher *)arg;
+       if (philosopher->data->num_philosophers == 1)
+       {
+               pthread_mutex_lock(philosopher->left_forks);
+               print_status(philosopher, FORKS_TAKEN);
+               usleep(philosopher->data->time_to_die * 1000);
+               pthread_mutex_unlock(philosopher->left_forks);
+               return (NULL);
+       }
+       if (philosopher->id % 2 == 1)
+               usleep(philosopher->data->time_to_eat * 1000);
 	while (is_simulation_running(philosopher->data))
 	{
 		philosopher_think(philosopher);
@@ -32,15 +42,15 @@ t_state_data	create_philosophers(t_data *data, t_philosopher **philos)
 {
 	int	i;
 
-	*philos = malloc(sizeof(t_philosopher) * data->num_philosophers);
-	if (*philos == NULL)
-	{
-		printf("Error: Memory allocation failed for philosophers.\n");
-		return (FAILED_VALUE);
-	}
-	i = 0;
-	while (i < data->num_philosophers)
-	{
+        *philos = malloc(sizeof(t_philosopher) * data->num_philosophers);
+        if (*philos == NULL)
+        {
+                printf("Error: Memory allocation failed for philosophers.\n");
+                return (FAILED_VALUE);
+        }
+        i = 0;
+        while (i < data->num_philosophers)
+        {
 		(*philos)[i].id = i + 1;
 		(*philos)[i].state = THINKING;
 		(*philos)[i].meals_eaten = 0;
@@ -48,12 +58,19 @@ t_state_data	create_philosophers(t_data *data, t_philosopher **philos)
 		(*philos)[i].right_forks = &data->forks[(i + 1) % data->num_philosophers];
 		(*philos)[i].data = data;
 		(*philos)[i].last_meal_time = data->start_time;
-		if (pthread_create(&(*philos)[i].thread, NULL, philosopher_routine, &(*philos)[i]) != 0)
-		{
-			printf("Error: Failed to create philosopher thread %d.\n", i + 1);
-			return (FAILED_VALUE);
-		}
-		i++;
-	}
-	return (SUCCESS_VALUE);
+                if (pthread_create(&(*philos)[i].thread, NULL, philosopher_routine, &(*philos)[i]) != 0)
+                {
+                        printf("Error: Failed to create philosopher thread %d.\n", i + 1);
+                        pthread_mutex_lock(&data->simulation_mutex);
+                        data->simulation_running = 0;
+                        pthread_mutex_unlock(&data->simulation_mutex);
+                        while (i-- > 0)
+                                pthread_join((*philos)[i].thread, NULL);
+                        free(*philos);
+                        *philos = NULL;
+                        return (FAILED_VALUE);
+                }
+                i++;
+        }
+        return (SUCCESS_VALUE);
 }
