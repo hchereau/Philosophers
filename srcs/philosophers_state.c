@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers_state.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:46:10 by linux             #+#    #+#             */
-/*   Updated: 2025/06/23 22:45:50 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/05 14:49:43 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void	philosopher_think(t_philosopher *philosopher)
 
 void	try_take_forks(t_philosopher *philosopher)
 {
-    if (philosopher->data->num_philosophers == 1) {
-        pthread_mutex_lock(philosopher->left_forks);
-        print_status(philosopher, FORKS_TAKEN);
-        usleep(philosopher->data->time_to_die * 1000);
-        pthread_mutex_unlock(philosopher->left_forks);
-        return;
-    }
+	if (philosopher->data->num_philosophers == 1)
+	{
+		pthread_mutex_lock(philosopher->left_forks);
+		print_status(philosopher, FORKS_TAKEN);
+		usleep(philosopher->data->time_to_die * 1000);
+		pthread_mutex_unlock(philosopher->left_forks);
+		return ;
+	}
 	if (philosopher->id % 2 == 0)
 	{
 		pthread_mutex_lock(philosopher->left_forks);
@@ -44,17 +45,17 @@ void	try_take_forks(t_philosopher *philosopher)
 
 void	philosopher_eat(t_philosopher *philosopher)
 {
-       pthread_mutex_lock(&philosopher->data->simulation_mutex);
-       philosopher->last_meal_time = get_timestamp();
-       pthread_mutex_unlock(&philosopher->data->simulation_mutex);
-       print_status(philosopher, EATING);
-       usleep(philosopher->data->time_to_eat * 1000);
-       pthread_mutex_lock(&philosopher->data->simulation_mutex);
-       philosopher->meals_eaten++;
-       if (philosopher->data->time_to_die >= philosopher->data->time_to_eat * 2
-                       + philosopher->data->time_to_sleep)
-               philosopher->last_meal_time = get_timestamp();
-       pthread_mutex_unlock(&philosopher->data->simulation_mutex);
+	pthread_mutex_lock(&philosopher->data->simulation_mutex);
+	philosopher->last_meal_time = get_timestamp();
+	pthread_mutex_unlock(&philosopher->data->simulation_mutex);
+	print_status(philosopher, EATING);
+	usleep(philosopher->data->time_to_eat * 1000);
+	pthread_mutex_lock(&philosopher->data->simulation_mutex);
+	philosopher->meals_eaten++;
+	if (philosopher->data->time_to_die >= philosopher->data->time_to_eat * 2
+		+ philosopher->data->time_to_sleep)
+		philosopher->last_meal_time = get_timestamp();
+	pthread_mutex_unlock(&philosopher->data->simulation_mutex);
 }
 
 void	return_forks(t_philosopher *philosopher)

@@ -12,6 +12,7 @@ SRCS += cleanup.c
 SRCS += is_simulation_running.c
 SRCS += philosophers_state.c
 SRCS += print_status.c
+SRCS += handle_philosophers_creation.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -27,11 +28,12 @@ OBJS := $(patsubst %.c,$(PATH_OBJS)%.o,$(SRCS))
 
 ### COMPILATION ################################################################
 
-CC := clang
+CC := cc
 
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
+CFLAGS += -Og
 CFLAGS += -g3
 
 ### COLORS ####################################################################

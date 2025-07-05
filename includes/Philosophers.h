@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/06/23 22:27:16 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/05 16:53:23 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 # define MAX_PHILOSOPHERS 200
 # define INFINITE_MEALS -1
@@ -98,6 +99,8 @@ void				philosopher_eat(t_philosopher *philosopher);
 void				return_forks(t_philosopher *philosopher);
 void				cleanup(t_data *data, t_philosopher *philos);
 t_simulation_state	is_simulation_running(t_data *data);
-
+t_main_state		handle_philosophers_creation(t_data	*data,
+						t_philosopher **philos);
+void				start_simulation(t_data *data, t_philosopher *philos);
 
 #endif
