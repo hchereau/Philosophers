@@ -17,6 +17,16 @@ void	*philosopher_routine(void *arg)
 	t_philosopher	*philosopher;
 
 	philosopher = (t_philosopher *)arg;
+       if (philosopher->data->num_philosophers == 1)
+       {
+               pthread_mutex_lock(philosopher->left_forks);
+               print_status(philosopher, FORKS_TAKEN);
+               usleep(philosopher->data->time_to_die * 1000);
+               pthread_mutex_unlock(philosopher->left_forks);
+               return (NULL);
+       }
+       if (philosopher->id % 2 == 1)
+               usleep(philosopher->data->time_to_eat * 1000);
 	while (is_simulation_running(philosopher->data))
 	{
 		philosopher_think(philosopher);
