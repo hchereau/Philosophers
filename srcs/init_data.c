@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:08:16 by linux             #+#    #+#             */
-/*   Updated: 2025/07/05 15:45:16 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:45:54 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,6 @@ t_state_data	init_data(t_data *data, int argc, char **argv)
 		pthread_mutex_destroy(&data->print_mutex);
 		return (FAILED_VALUE);
 	}
-	data->simulation_running = 1;
+	data->simulation_running = SIMULATION_RUNNING;
 	return (SUCCESS_VALUE);
 }

@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:06:17 by linux             #+#    #+#             */
-/*   Updated: 2025/07/05 14:55:51 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:44:04 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*philosopher_routine(void *arg)
 	}
 	if (philosopher->id % 2 == 1)
 		usleep(philosopher->data->time_to_eat * 1000);
-	while (is_simulation_running(philosopher->data))
+	while (is_simulation_running(philosopher->data) == SIMULATION_RUNNING)
 	{
 		philosopher_think(philosopher);
 		try_take_forks(philosopher);
@@ -63,7 +63,7 @@ static t_state_data	launch_thread(t_philosopher *philo,
 		printf("Error: Failed to create philosopher thread %d.\n",
 			id + 1);
 		pthread_mutex_lock(&data->simulation_mutex);
-		data->simulation_running = 0;
+		data->simulation_running = SIMULATION_STOPPED;
 		pthread_mutex_unlock(&data->simulation_mutex);
 		return (FAILED_VALUE);
 	}

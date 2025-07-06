@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:47:58 by linux             #+#    #+#             */
-/*   Updated: 2025/07/05 17:57:12 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:45:28 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_status(t_philosopher *philosopher, t_philosopher_state state)
 	if (state != DEAD)
 	{
 		pthread_mutex_lock(&philosopher->data->simulation_mutex);
-		if (philosopher->data->simulation_running == 0)
+		if (philosopher->data->simulation_running == SIMULATION_STOPPED)
 		{
 			pthread_mutex_unlock(&philosopher->data->simulation_mutex);
 			return ;

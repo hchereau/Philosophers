@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/07/05 16:53:23 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:49:15 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define SPACE ' '
 # define FIRST_WHITESPACE 9
 # define LAST_WHITESPACE 13
-# define SIMULATION_RUNNING 1
 
 /* ENUM */
 
@@ -52,25 +51,25 @@ typedef enum e_philosopher_state
 
 typedef enum e_simulation_state
 {
-	RUNNING,
-	STOPPED
+	SIMULATION_STOPPED,
+	SIMULATION_RUNNING
 }	t_simulation_state;
 
 /* STRUCT */
 
 typedef struct s_data
 {
-	int				num_philosophers;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				time_to_die;
-	int				max_meals;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	print_mutex;
-	pthread_t		monitor_thread;
-	long			start_time;
-	int				simulation_running;
-	pthread_mutex_t	simulation_mutex;
+	int					num_philosophers;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					time_to_die;
+	int					max_meals;
+	pthread_mutex_t		*forks;
+	pthread_mutex_t		print_mutex;
+	pthread_t			monitor_thread;
+	long				start_time;
+	t_simulation_state	simulation_running;
+	pthread_mutex_t		simulation_mutex;
 }	t_data;
 
 typedef struct s_philosopher

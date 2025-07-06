@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:52:07 by hucherea          #+#    #+#             */
-/*   Updated: 2025/07/05 16:55:47 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:44:43 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_death(t_philosopher *philos, t_data *data)
 		{
 			print_status(&philos[i], DEAD);
 			pthread_mutex_lock(&data->simulation_mutex);
-			data->simulation_running = 0;
+			data->simulation_running = SIMULATION_STOPPED;
 			pthread_mutex_unlock(&data->simulation_mutex);
 			return (0);
 		}
@@ -57,7 +57,7 @@ static int	check_meals(t_philosopher *philos, t_data *data)
 		j++;
 	}
 	pthread_mutex_lock(&data->simulation_mutex);
-	data->simulation_running = 0;
+	data->simulation_running = SIMULATION_STOPPED;
 	pthread_mutex_unlock(&data->simulation_mutex);
 	return (0);
 }
@@ -94,7 +94,7 @@ t_main_state	handle_philosophers_creation(t_data	*data,
 	{
 		printf("Error: Failed to create monitor thread.\n");
 		pthread_mutex_lock(&data->simulation_mutex);
-		data->simulation_running = 0;
+		data->simulation_running = SIMULATION_STOPPED;
 		pthread_mutex_unlock(&data->simulation_mutex);
 		start_simulation(data, *philos);
 		cleanup(data, *philos);
