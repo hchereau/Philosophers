@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:47:58 by linux             #+#    #+#             */
-/*   Updated: 2025/07/06 14:45:28 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 15:30:42 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long	get_timestamp(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	return (tv.tv_sec * US_PER_MS + tv.tv_usec / US_PER_MS);
 }
 
 bool	choose_print(t_philosopher_state state, char **state_str)

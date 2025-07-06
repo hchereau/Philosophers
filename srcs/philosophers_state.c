@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:46:10 by linux             #+#    #+#             */
-/*   Updated: 2025/07/05 14:49:43 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 15:30:28 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ void	return_forks(t_philosopher *philosopher)
 	pthread_mutex_unlock(philosopher->left_forks);
 	pthread_mutex_unlock(philosopher->right_forks);
 	print_status(philosopher, SLEEPING);
-	usleep(philosopher->data->time_to_sleep * 1000);
+	usleep(philosopher->data->time_to_sleep * US_PER_MS);
 }

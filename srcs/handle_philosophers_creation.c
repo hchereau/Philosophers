@@ -6,13 +6,13 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:52:07 by hucherea          #+#    #+#             */
-/*   Updated: 2025/07/06 14:44:43 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 15:28:52 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Philosophers.h"
 
-static int	check_death(t_philosopher *philos, t_data *data)
+static bool	check_death(t_philosopher *philos, t_data *data)
 {
 	int		i;
 	long	now;
@@ -31,19 +31,19 @@ static int	check_death(t_philosopher *philos, t_data *data)
 			pthread_mutex_lock(&data->simulation_mutex);
 			data->simulation_running = SIMULATION_STOPPED;
 			pthread_mutex_unlock(&data->simulation_mutex);
-			return (0);
+			return (false);
 		}
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
-static int	check_meals(t_philosopher *philos, t_data *data)
+static bool	check_meals(t_philosopher *philos, t_data *data)
 {
 	int	j;	
 
 	if (data->max_meals == INFINITE_MEALS)
-		return (1);
+		return (true);
 	j = 0;
 	while (j < data->num_philosophers)
 	{
@@ -51,7 +51,7 @@ static int	check_meals(t_philosopher *philos, t_data *data)
 		if (philos[j].meals_eaten < data->max_meals)
 		{
 			pthread_mutex_unlock(&data->simulation_mutex);
-			return (1);
+			return (true);
 		}
 		pthread_mutex_unlock(&data->simulation_mutex);
 		j++;
@@ -59,7 +59,7 @@ static int	check_meals(t_philosopher *philos, t_data *data)
 	pthread_mutex_lock(&data->simulation_mutex);
 	data->simulation_running = SIMULATION_STOPPED;
 	pthread_mutex_unlock(&data->simulation_mutex);
-	return (0);
+	return (false);
 }
 
 void	*monitor_routine(void *arg)
@@ -71,9 +71,9 @@ void	*monitor_routine(void *arg)
 	data = philos[0].data;
 	while (is_simulation_running(data))
 	{
-		if (!check_death(philos, data))
+		if (check_death(philos, data) == false)
 			return (NULL);
-		if (!check_meals(philos, data))
+		if (check_meals(philos, data) == false)
 			return (NULL);
 		usleep(1000);
 	}

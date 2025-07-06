@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:32:29 by linux             #+#    #+#             */
-/*   Updated: 2025/07/06 14:49:15 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 15:29:12 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define SPACE ' '
 # define FIRST_WHITESPACE 9
 # define LAST_WHITESPACE 13
+# define US_PER_MS	1000
 
 /* ENUM */
 

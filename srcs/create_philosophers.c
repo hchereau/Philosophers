@@ -6,7 +6,7 @@
 /*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:06:17 by linux             #+#    #+#             */
-/*   Updated: 2025/07/06 14:44:04 by hucherea         ###   ########.fr       */
+/*   Updated: 2025/07/06 15:31:19 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	*philosopher_routine(void *arg)
 	{
 		pthread_mutex_lock(philosopher->left_forks);
 		print_status(philosopher, FORKS_TAKEN);
-		usleep(philosopher->data->time_to_die * 1000);
+		usleep(philosopher->data->time_to_die * US_PER_MS);
 		pthread_mutex_unlock(philosopher->left_forks);
 		return (NULL);
 	}
 	if (philosopher->id % 2 == 1)
-		usleep(philosopher->data->time_to_eat * 1000);
+		usleep(philosopher->data->time_to_eat * US_PER_MS);
 	while (is_simulation_running(philosopher->data) == SIMULATION_RUNNING)
 	{
 		philosopher_think(philosopher);
